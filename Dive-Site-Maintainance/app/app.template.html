@@ -1,0 +1,36 @@
+﻿<div class="container-fluid">
+    <h1>Dive Site Maintainance</h1>
+    <!--uses the *ngIf to specify which component to display, based on the function and variable in "app.component.ts". -->
+    <!--The [sites] is an INPUT PROPERTY BINDING, meaning that we can pass data to a chile/nested componment (in this case the "site-list.component.ts")-->
+    <!--The (onAdd) is an EVENT BINDING as we are calling the function "navigateTo" in app.component.ts. This notifies the AppComponent(app.component.ts) of an event
+    which then executes the function "navigateTo" with the parameter 'add'-->
+
+    <div [ngSwitch]="currentView">
+
+        <site-list-view *ngSwitchDefault
+                        [sites]="sites"
+                        (onAdd)="startAdd()"
+                        (onEdit)="startEdit($event)"
+                        (onDelete)="startDelete($event)">
+        </site-list-view>
+
+        <add-site-view *ngSwitchCase="'add'"
+                       [siteId]="newSiteId"
+                       (onAdded)="siteAdded($event)"
+                       (onCancel)="navigateTo('list')">
+        </add-site-view>
+
+        <edit-site-view *ngSwitchCase="'edit'"
+                        [site]="currentSite"
+                        (onSaved)="siteSaved($event)"
+                        (onCancel)="navigateTo('list')">
+        </edit-site-view>
+
+        <delete-site-view *ngSwitchCase="'delete'"
+                          [site]="currentSite"
+                          (onDeleted)="siteDeleted($event)"
+                          (onCancel)="navigateTo('list')">
+        </delete-site-view>
+
+    </div>
+</div>

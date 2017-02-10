@@ -1,0 +1,32 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <!--The (click)="add" calles the "add" function in "site-list.component.ts" which then emits an event-->
+        <button class="btn btn-primary btn-lg"
+                (click)="add()">
+            Add new Site
+        </button>
+
+    </div>
+
+</div>
+<h2>List of dive sites</h2>
+<!--*ngFor is basically an implementation of a foreach loop-->
+<div class="row" *ngFor="let site of sites">
+    <div class="col-sm-8">
+        <h4>{{site.id}}: {{site.name}}</h4>
+    </div>
+
+    <div class="col-sm-4" style="margin-top:5px;">
+
+        <div class="pull-right">
+            <button class="btn btn-warning btn-sm"
+                    (click)="edit(site.id)">
+                Edit
+            </button>
+            <button class="btn btn-danger btn-sm"
+                    (click)="delete(site.id)">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <!--The (click)="add" calles the "add" function in "site-list.component.ts" which then emits an event-->
+        <button class="btn btn-primary btn-lg"
+                (click)="add()">
+            Add new Site
+        </button>
+
+    </div>
+
+</div>
+<h3>List of dive sites</h3>
+<!--*ngFor is basically an implementation of a foreach loop-->
+<!-- 2017-02-10; "let i=index" added to be used for [ngStyling]
+    example:
+
+    <div class="row" *ngFor="let site of sites; let i=index;"
+     [ngStyle]=" {'background-color': i%2 == 0 ? '#dddddd' : 'inherit' }">
+
+    ALTERNATELY: "even", "first" & "last" can also be assigned.
+
+    EXAMPLE: You can assign "even" style like so;
+    <div class="row" *ngFor="let site of sites; let e=even; let f=first; let l=last;"
+     [ngStyle]="{'background-color':e ? '#dddddd' : 'inherit' }"
+
+    ***WARNING NOTE*** when using [ngStyle] the style does not return to the original page load style once ywActionalble takes place.
+
+    "[class.even]", "[class.topRow]" & [class.bottomRow] style classes are declared in the "site-list.component.ts" file.
+    below is the implementation of the css classes. ***NOTE*** [ngClass]="{evenRow:e}" can also be replaced with [class.evenRow]="e".
+
+
+    -->
+<div class="row" *ngFor="let site of sites; let e=even; let f=first; let l=last;"
+     ywActionable
+     [ngClass]="{evenRow:e}"
+     [class.topRow]="f"
+     [class.bottomRow]="l">
+
+    <div class="col-sm-8">
+        <h4>{{site.id}}: {{site.name}}</h4>
+    </div>
+
+    <div class="col-sm-4" style="margin-top:5px;">
+
+        <div class="pull-right">
+            <button class="btn btn-warning btn-sm"
+                    (click)="edit(site.id)">
+                Edit
+            </button>
+            <button class="btn btn-danger btn-sm"
+                    (click)="delete(site.id)">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
